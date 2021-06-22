@@ -9,6 +9,7 @@ import { Data2Service } from '../data2.service';
 })
 export class AddtocartComponent implements OnInit {
   totalsum:number
+  product:any
   check:boolean=false
   counter= new Array(100).fill(1);
   users:any[]=[]
@@ -26,7 +27,7 @@ export class AddtocartComponent implements OnInit {
     }
   
     ngOnInit(): void {
-      this.getlist();   
+      this.getlist();  
     }
   
   

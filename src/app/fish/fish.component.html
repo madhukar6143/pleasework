@@ -12,10 +12,10 @@
                     <button class="btn y float-end" (click)="addToCart(data,ind)"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
                     </div>
     
-                <div  *ngIf="similarDataCount[ind]==1">
-                       <button (click)="removeFromCart(data.id,ind)" > remove from cart</button>
-                       <button (click)="goToCart()">go to cart</button>
-                </div>
+                    <div class="btn-group" *ngIf="similarDataCount[ind]==1">    
+                        <button  class="btn btn-success" (click)="goToCart()">Go to cart</button>
+                        <button   (click)="removeFromCart(data.id,ind)" class="btn rem"><i class="far fa-trash-alt"></i></button>
+                    </div>
     
            </div>
            <div class="modal fade" [attr.id]="'x'+ind" data-bs-backdrop="static">

@@ -1,52 +1,56 @@
 
 <div *ngIf="!check" class="text-center text-danger p-5 h3">Cart is Empty</div>
 <div class="container " *ngIf="display">
-       <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-3 g-4  mb-5">
+  <h1 class="display-3 text-center mt-1"><i class="fas fa-shopping-cart"></i> My Cart</h1>
+       <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-3 g-4  mb-5 mt-1">
         <div class="col" *ngFor="let  p of users;let ind=index">
-          <div class="card" >
-            <img src= {{p.imgPath}}  class="card-img-top " >
-                  <div class="card-body bg-dark">
-                     <h5 class="card-title text-center text-danger"><strong>{{p.name}}</strong></h5>
-                     <p class=" p-3 text-white">{{p.description}}</p>
-                     <p class=" p-3 text-white">{{p.price}}</p>
+          <div class="card bg" >
+            <img src= {{p.imgPath}}  class="card-img-top ">
+                  <div class="card-body">
+                     <h4>{{p.name}}</h4>
+                     <h5 class="p-1 fw-bold">₹{{p.price}}</h5>
                      <div>
-                     <button class="bg bg-danger" (click)="delete(p.id)">delete</button>
-                     <span class="float-right">
-                     <button (click)="callcounterminus(ind)"> -</button>
-                     <span class="text-warning p-1">{{this.counter[ind]}}</span>
-                     <button (click)="callcounterplus(ind)">+</button>
-                    </span>
+                     <button class="btn x" (click)="delete(p.id)">Delete</button>
+                     <button class="float-end btn-group btn">
+                     <button class="btn btn-outline-light" (click)="callcounterminus(ind)">-</button>
+                     <button class="btn btn-outline-light btn-success text-white">{{this.counter[ind]}}</button>
+                     <button class="btn btn-outline-light" (click)="callcounterplus(ind)">+</button>
+                     </button>
                     </div>
                    
            </div>
         </div>
     </div>
     </div>
-<div *ngIf="check" class="text-center pb-5 " (click)="placeOrder()"><button class="bg bg-success" >Place Order</button></div>
-</div>
-      <div *ngIf="!display" class="text-warning text-center">
-        
-         
-<table class="table">
-  <thead>
-  <tr>
-  <th>Name</th>
-  <th>Price</th>
-  <th>Quantity</th>
-  <th>Total</th>
+<div *ngIf="check" class="text-center pb-5 " (click)="placeOrder()"><button class="btn btn-lg btn-success" >Place Order</button></div>
 
-</tr>
+
+
+</div>
+
+<div *ngIf="!display" class="text-center container mt-4">
+           
+<table class="table table-sm">
+  <thead class="table-light">
+   <tr>
+    <th class="hide">Item</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+  </tr>
 </thead >
 <tbody *ngFor="let p of users;let ind=index">
   <tr>
-      <td>{{p.name}}</td>
+      <td class="hide"><img [src]="p.imgPath" style="max-width:100px;max-height: 100px;"></td>
+      <td>{{p.name|uppercase}}</td>
       <td>{{p.price}}</td>
       <td>{{this.counter[ind]}}</td>
       <td>{{this.counter[ind]*p.price}}</td>
   </tr>
-</tbody>
+  </tbody>
 </table>
-<h1 class="text-center bg-secondary">
-grandtotal={{totalsum}}
+<h1 class="h1 text-center bg-total p-1 m-3">
+Grandtotal = ₹{{totalsum}}
 </h1>
-      </div>
+</div>

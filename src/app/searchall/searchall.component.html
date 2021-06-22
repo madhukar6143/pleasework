@@ -1,22 +1,24 @@
+<div class="text-center d-flex flex-wrap">
+    <input type="text" name="title" placeholder="Search here" class="form-control m-5" [(ngModel)]="searchTerm">
+</div>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-3">
-    <div class="col" *ngFor="let data of mydata;let ind=index">
+    <div class="col" *ngFor="let data of mydata | search:searchTerm;let ind=index">
         <div class="card shadow mb-3 bg-dark text-white">
             <img [src]="data.imgPath" class="w-100">
             <div class="m-3">
                 <h4 class="h4">{{data.name}}</h4>
                 <div class="d-flex justify-content-between align-items-center m-3">
                 <button class="btn x" [attr.data-bs-target]="'#x'+ind" data-bs-toggle="modal">View</button>
- 
 
-                <div class="col-6" *ngIf="similarDataCount[ind]==0 ">
-                    <button class="btn y float-end" (click)="addToCart(data,ind)"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
-                    </div>
-    
-                    <div class="btn-group" *ngIf="similarDataCount[ind]==1">    
-                        <button  class="btn btn-success" (click)="goToCart()">Go to cart</button>
-                        <button   (click)="removeFromCart(data.id,ind)" class="btn rem"><i class="far fa-trash-alt"></i></button>
-                    </div>
-    
+           <div class="col-6" *ngIf="similarDataCount[ind]==0 ">
+            <button class="btn y float-end" (click)="addToCart(data,ind)"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
+            </div>
+
+            <div class="btn-group" *ngIf="similarDataCount[ind]==1">    
+                <button  class="btn btn-success" (click)="goToCart()">Go to cart</button>
+                <button   (click)="removeFromCart(data.id,ind)" class="btn rem"><i class="far fa-trash-alt"></i></button>
+            </div>
+
            </div>
            <div class="modal fade" [attr.id]="'x'+ind" data-bs-backdrop="static">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -44,3 +46,4 @@
           </div>
     </div>
 </div>
+

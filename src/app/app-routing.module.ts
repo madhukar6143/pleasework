@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import{PgnotfoundComponent} from './pgnotfound/pgnotfound.component';
+import { SearchallComponent } from './searchall/searchall.component';
 import{StarterComponent} from './starter/starter.component';
 import { SoupComponent } from './soup/soup.component';
 import { PizzaComponent } from './pizza/pizza.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
 {path:'signup',component:SignupComponent},
 {path:'login',component:LoginComponent},
 {path:'contactus',component:ContactusComponent},
+{path:'searchall',component:SearchallComponent},
 {path:'addtocart',component:AddtocartComponent},
 {path:'starter',component:StarterComponent,children:[{path:'soup',component:SoupComponent},
 {path:'pizza',component:PizzaComponent},

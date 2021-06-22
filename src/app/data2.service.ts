@@ -71,6 +71,10 @@ export class Data2Service {
   {
     return this.hc.get<any>("http://localhost:3000/drinks")
   }
+  getMenuData():Observable<any>
+  {
+    return this.hc.get<any>("http://localhost:3000/menu")
+  }
 
 
   getFromAddToCart():Observable<any>

@@ -33,6 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {ToastrModule} from "ngx-toastr";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddtocartComponent } from './addtocart/addtocart.component';
+import { SearchallComponent } from './searchall/searchall.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { AddtocartComponent } from './addtocart/addtocart.component';
     StarterComponent,
     VegcurryComponent,
     CakeComponent,
-    AddtocartComponent
+    AddtocartComponent,
+    SearchallComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

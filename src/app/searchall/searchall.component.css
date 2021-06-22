@@ -35,3 +35,7 @@ button{
     color: #621622;
     background-color: #d33943;
 }
+input{
+    border-radius:50px;
+    border-color:#58B69B;
+}
