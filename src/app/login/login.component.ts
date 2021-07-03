@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,30 +9,33 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private us:UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
-  onLogin(ref){
 
-    let userLoginObj=ref.value;
-    console.log(ref.value)
-   
-    //if username & pw are admin , then only navigate to admin component
-     if(userLoginObj.username!='admin'){
-      alert("Invalid username")
-     }
-     else if(userLoginObj.password!='admin'){
-      alert("Invalid pass try later")
-     }
-     else{
-       //save username in local storage
-       localStorage.setItem("username","admin")
-       
-      this.router.navigateByUrl("/admin");
-     }
-     
-}
+  onLogin(userCredentials){
+    this.us.loginUser(userCredentials).subscribe(
+      res=>{
+        if(res.message==="Login successful"){
+          //save token to localstorage
+          localStorage.setItem("token",res.token)
+          localStorage.setItem("username",res.username)
+          localStorage.setItem("userObj",JSON.stringify(res.userObj))
+          this.us.userLoginStatus=true;
+          //navigate to user profile
+          this.router.navigateByUrl("/starter")
+        }
+        else{
+          alert(res.message)
+        }
+      },
+      err=>{
+        console.log(err)
+        alert("Something went wrong in login")
+      }
+    )
+  }
 
 go(){
   this.router.navigateByUrl("/signup")

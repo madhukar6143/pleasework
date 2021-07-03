@@ -4,7 +4,7 @@
         <div class=" col-12 col-sm-8 col-md-6 mt-3 mb-3">
           <div class=" bg-dark card card-body  text-white rounded" id="p1">
             <h1 class="display-6 text-center x">Sign Up</h1>
-            <form #ref="ngForm" (ngSubmit)="ref.form.valid">
+            <form #ref="ngForm" (ngSubmit)="ref.form.valid && onSignup(ref.value)">
                 <div class="input-group pt-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text y"><i class="fas fa-user py-1"></i></span>

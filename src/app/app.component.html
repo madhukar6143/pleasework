@@ -13,11 +13,12 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="signup" routerLinkActive="active">Sign up</a>
               </li>
-              <li class="nav-item" *ngIf="!ds.userLoginStatus()">
-                <a class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
+              <li class="nav-item" *ngIf="!us.userLoginStatus">
+                <a class="nav-link" routerLink="login" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Login</a>
               </li>
-              <li class="nav-item" *ngIf="ds.userLoginStatus()">
-                <a class="nav-link" routerLink="login" routerLinkActive="active" (click)="ds.logout()">Logout</a>
+      
+              <li class="nav-item"  *ngIf="us.userLoginStatus">
+                <a class="nav-link" routerLink="login" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  (click)=userLogout()>Logout</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" routerLink="contactus" routerLinkActive="active">Contact us</a>
