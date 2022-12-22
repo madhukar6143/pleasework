@@ -36,6 +36,7 @@ import { AddtocartComponent } from './addtocart/addtocart.component';
 import { SearchallComponent } from './searchall/searchall.component';
 import { SearchPipe } from './search.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,

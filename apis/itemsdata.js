@@ -1,0 +1,75 @@
+const exp=require("express")
+const itemsApi=exp.Router();
+const mc=require("mongodb").MongoClient;
+const expressErrorHandler=require("express-async-handler")
+//core one no need to import
+
+const checkToken=require("./middlewares/verifyToken")
+
+itemsApi.use(exp.json())
+
+const databaseUrl="mongodb+srv://madhu:madhu@clusterbackend.szevd.mongodb.net/myfirstdb?retryWrites=true&w=majority"
+
+let databaseObj;
+let userCollectionsObj;
+
+mc.connect(databaseUrl,{useNewUrlParser:true,useUnifiedTopology:true},(err,client)=>{
+    if(err){
+        console.log("error in database connection",err)
+    }
+    else{
+        databaseObj=client.db("delish");
+        userCollectionsObj=databaseObj.collection("delishusersdata")
+        console.log("Database connection is success")
+         
+    }
+})
+
+
+    
+//getting users cart data from mongodb database 
+itemsApi.get('/addtocart/:username',expressErrorHandler(async(req,res,next)=>{
+    let myusername=req.params.username;
+    let userList=await userCollectionsObj.findOne({username:myusername})   
+    res.send({message:userList.cart})
+}))
+
+
+//Cart Operations
+//Inserting into cart from components
+
+itemsApi.post("/addToCartFromComponent/:username",expressErrorHandler(async(req,res,next)=>{
+    let myusername=req.params.username;
+    let itemToAdd=req.body;
+ 
+await userCollectionsObj.findOneAndUpdate(
+    {
+      username: myusername,
+    },
+    {
+      $addToSet: {
+        cart: itemToAdd,
+      },
+    }
+  )
+}))
+
+//Removing Items from Cart from Cart or Components
+itemsApi.post("/removeFromCartFromComponent/:username",expressErrorHandler(async(req,res,next)=>{
+    let myusername=req.params.username;
+    let itemToAdd=req.body;
+await userCollectionsObj.findOneAndUpdate(
+    {
+      username: myusername,
+    },
+    {
+      $pull: {
+        cart: itemToAdd,
+      },
+    }
+  )
+}))
+
+
+//export module
+module.exports=itemsApi

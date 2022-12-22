@@ -13,6 +13,7 @@ export class AppComponent {
   userLogout(){
     localStorage.clear();
     this.us.userLoginStatus=false;
+    this.us.sharedUser.username=undefined
   }
   
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Data2Service } from '../data2.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-addtocart',
@@ -12,11 +13,13 @@ export class AddtocartComponent implements OnInit {
   product:any
   check:boolean=false
   counter= new Array(100).fill(1);
-  users:any[]=[]
+  users:any[]=undefined
   display:boolean=true
-    constructor( private obj:Data2Service, private router:Router ) { }
+  localUserObject:any=undefined
   
-   
+ 
+    constructor( private us:UserService ,private obj:Data2Service, private router:Router ) { }
+
     callcounterplus(ind){
       this.counter[ind]=this.counter[ind]+1
     }
@@ -27,7 +30,22 @@ export class AddtocartComponent implements OnInit {
     }
   
     ngOnInit(): void {
-      this.getlist();  
+      console.log("besast");
+      this.us.getAllUser().subscribe(
+        res=>
+        {
+        console.log(res)
+        },
+        err=>
+        {
+          console.log("yeah error in refresh",err)
+        }
+      )
+  
+      
+  this.localUserObject = this.us.sharedUser.username
+  this.getlist();
+      
     }
   
   
@@ -74,17 +92,21 @@ export class AddtocartComponent implements OnInit {
     this.obj.getFromAddToCart().subscribe(
       res=>
       {
-        this.users=res;
+        this.users=res.message ;
         if(this.users.length>0)
-        {
         this.check=true
-      }
       },
       err=>
       {
         console.log("yeah error in refresh",err)
       }
     )
+
+   
+
+
+
+   
   }
   
   }

@@ -1,7 +1,7 @@
 
 <div *ngIf="!check" class="text-center text-danger p-5 h3">Cart is Empty</div>
 <div class="container " *ngIf="display">
-  <h1 class="display-3 text-center mt-1"><i class="fas fa-shopping-cart"></i> My Cart</h1>
+  <h1 class="display-3 text-center mt-1"><i class="fas fa-shopping-cart"></i>{{localUserObject == undefined  ? "My " :localUserObject }} Cart</h1>
        <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-3 g-4  mb-5 mt-1">
         <div class="col" *ngFor="let  p of users;let ind=index">
           <div class="card bg" >

@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Data2Service {
 
-  constructor(private hc:HttpClient) { }
+  constructor(private hc:HttpClient,private un:UserService) { }
 
   getSoupData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/soups")
+    return this.hc.get<any>("/items/soups")
   }
 
   getBiryaniData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/biryani")
+    return this.hc.get<any>("/items/biryani")
   }
 
   getPizzasData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/pizzas")
+    return this.hc.get<any>("/items/pizzas")
   }
 
   getSaladsData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/salads")
+    return this.hc.get<any>("/items/salads")
   }
   getGrillData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/grill")
+    return this.hc.get<any>("/items/grill")
   }
 
   getFishData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/fish")
+    return this.hc.get<any>("/items/fish")
   }
   getPrawnsData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/prawns")
+    return this.hc.get<any>("/items/prawns")
   }
 
   getCrabsData():Observable<any>
@@ -79,18 +80,40 @@ export class Data2Service {
 
   getFromAddToCart():Observable<any>
   {
-    
-  return this.hc.get<any>('http://localhost:3000/addtocart')
+    let username=this.un.sharedUser.username
+  return this.hc.get<any>(`/items/addtocart/${username}`)
  }
+
+
+
+ getFromAddToCar(obj):Observable<any>
+ {
+
+  
+  let username=this.un.sharedUser.username
+ return this.hc.post<any>(`/items/removeFromCartFromComponent/${username}`,obj)
+ 
+   
+}
 
 
  postToAddToCart(obj):Observable<any>
  {
- return this.hc.post<any>('http://localhost:3000/addtocart',obj)
+  let username=this.un.sharedUser.username
+ return this.hc.post<any>(`/items/addToCartFromComponent/${username}`,obj)
  
 }
 
- deleteDataUsingId(id: string):Observable<any[]>
+
+
+deleteDataUsingId(id):Observable<any>
+ {
+  let username=this.un.sharedUser.username
+ return this.hc.post<any>(`/items/removeFromCartFromComponent/${username}`,id)
+ 
+}
+
+ ydeleteDataUsingId(id):Observable<any[]>
  {
    return this.hc.delete<any[]>('http://localhost:3000/addtocart/'+id)
  }
