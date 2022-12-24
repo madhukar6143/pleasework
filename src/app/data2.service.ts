@@ -19,6 +19,16 @@ export class Data2Service {
  }
 
 
+
+ callBackend():Observable<any>
+ {
+  console.log("called from componet")
+ return this.hc.get<any>('addtocart')
+}
+
+
+// pos
+
  // post to cart from compnents   to respective user  cart after login
  postToAddToCart(obj):Observable<any>
  {

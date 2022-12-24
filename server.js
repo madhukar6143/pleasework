@@ -4,6 +4,8 @@ const app=exp();
 const path = require("path")
 const bodyParser = require("body-parser");
  app.use(bodyParser.json());
+ 
+const expressErrorHandler=require("express-async-handler")
 
 
 //connecting front end to backend
@@ -17,6 +19,12 @@ app.use("/user",userApi)
 app.use("/items",itemsApi)
 
 
+
+app.get('/addtocart',expressErrorHandler(async(req,res,next)=>{
+    console.log("backend called")
+    let arr=[1,2,34]
+    res.send({message:arr})
+}))
 //connect angular app with express server
 app.use(exp.static(path.join(__dirname, './dist/delish/')))
 

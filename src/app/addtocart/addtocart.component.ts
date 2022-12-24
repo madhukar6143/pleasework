@@ -31,7 +31,18 @@ export class AddtocartComponent implements OnInit {
   
     ngOnInit(): void {
 
-      console.log("yeah")
+
+      
+    this.obj.callBackend().subscribe(
+      res=>
+      {
+        console.log("yeah response from backend",res)
+      },
+      err=>
+      {
+        console.log("yeah error in connecting backend",err)
+      }
+    )
     this.localUserObject = this.us.sharedUser.username
     this.getlist();
       
@@ -107,6 +118,8 @@ export class AddtocartComponent implements OnInit {
   
   getlist()
   {
+    
+   
     this.obj.getFromAddToCart().subscribe(
       res=>
       {
@@ -119,9 +132,6 @@ export class AddtocartComponent implements OnInit {
         console.log("yeah error in refresh",err)
       }
     )
-
-   
-
 
 
    
