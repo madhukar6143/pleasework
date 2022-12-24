@@ -18,8 +18,9 @@ export class SearchallComponent implements OnInit {
   
    ngOnInit() 
    {
-     this.getlist();  
+     //this.getlist();  
    }
+ /*
  
      getlist()
    {
@@ -81,6 +82,7 @@ export class SearchallComponent implements OnInit {
      }
    )
    }
+   */
  
  
  

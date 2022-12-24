@@ -10,6 +10,51 @@ export class Data2Service {
 
   constructor(private hc:HttpClient,private un:UserService) { }
 
+
+  // get what items present in cart of respective user after login
+  getFromAddToCart():Observable<any>
+  {
+    let username=this.un.sharedUser.username
+  return this.hc.get<any>(`items/addtocart/${username}`)
+ }
+
+
+ // post to cart from compnents   to respective user  cart after login
+ postToAddToCart(obj):Observable<any>
+ {
+  let username=this.un.sharedUser.username
+ return this.hc.post<any>(`items/addToCartFromComponent/${username}`,obj)
+ 
+}
+
+
+// help to remove unwanted items from cart 
+deleteDataUsingId(obj):Observable<any>
+ {
+  
+  let username=this.un.sharedUser.username
+ return this.hc.post<any>(`items/removeFromCartFromComponent/${username}`,obj)
+ 
+}
+
+userLoginStatus():boolean{
+    if(localStorage.getItem("username")==null){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+logout(){
+    localStorage.clear();
+  }
+}
+
+
+/*
+there functions whene we had data in db.json
+
   getSoupData():Observable<any>
   {
     return this.hc.get<any>("/items/soups")
@@ -62,72 +107,19 @@ export class Data2Service {
   }
   getCakesData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/cakes")
+    return this.hc.get<any>("https://localhost:3000/cakes")
   }
   getIceCreamsData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/icecreams")
+    return this.hc.get<any>("https://localhost:3000/icecreams")
   }
   getDrinksData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/drinks")
+    return this.hc.get<any>("https://localhost:3000/drinks")
   }
   getMenuData():Observable<any>
   {
-    return this.hc.get<any>("http://localhost:3000/menu")
+    return this.hc.get<any>("https://localhost:3000/menu")
   }
 
-
-  getFromAddToCart():Observable<any>
-  {
-    let username=this.un.sharedUser.username
-  return this.hc.get<any>(`/items/addtocart/${username}`)
- }
-
-
-
- getFromAddToCar(obj):Observable<any>
- {
-
-  
-  let username=this.un.sharedUser.username
- return this.hc.post<any>(`/items/removeFromCartFromComponent/${username}`,obj)
- 
-   
-}
-
-
- postToAddToCart(obj):Observable<any>
- {
-  let username=this.un.sharedUser.username
- return this.hc.post<any>(`/items/addToCartFromComponent/${username}`,obj)
- 
-}
-
-
-
-deleteDataUsingId(id):Observable<any>
- {
-  let username=this.un.sharedUser.username
- return this.hc.post<any>(`/items/removeFromCartFromComponent/${username}`,id)
- 
-}
-
- ydeleteDataUsingId(id):Observable<any[]>
- {
-   return this.hc.delete<any[]>('http://localhost:3000/addtocart/'+id)
- }
-
-  userLoginStatus():boolean{
-    if(localStorage.getItem("username")==null){
-      return false;
-    }
-    else{
-      return true;
-    }
-  }
-
-  logout(){
-    localStorage.clear();
-  }
-}
+*/

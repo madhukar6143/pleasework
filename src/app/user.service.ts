@@ -15,33 +15,33 @@ export class UserService {
 
   sharedUser: {
     // your properties here... e.g
-    
+    // gloab username dclartion so every compnent can access it
     username: 'string';
     
 };
 
+
+//user login 
   createUser(userObj):Observable<any>{
-    return  this.hc.post("/user/createuser",userObj)
+    return  this.hc.post("user/createuser",userObj)
   }
 
+
+  //user login 
   loginUser(credentials):Observable<any>{
-    
-    console.log("yeah bro from user services ",credentials)
-    return  this.hc.post("/user/login",credentials)
+    return  this.hc.post("user/login",credentials)
   }
 
 
 
-
+// get data of a user not neeeded for this project as of noe
   getUser(username):Observable<any>{
-      return this.hc.get(`/user/getuser/${username}`)
+
+      return this.hc.get(`user/getuser/${username}`)
   }
 
  
- getAllUser():Observable<any>{
-  console.log("in servives serase")
-    return this.hc.get('/addtocart')
-}
+
 
 
   deleteUser(){

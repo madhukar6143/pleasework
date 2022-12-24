@@ -29,6 +29,7 @@ mc.connect(databaseUrl,{useNewUrlParser:true,useUnifiedTopology:true},(err,clien
     
 //getting users cart data from mongodb database 
 itemsApi.get('/addtocart/:username',expressErrorHandler(async(req,res,next)=>{
+  console.log("attendence from get ")
     let myusername=req.params.username;
     let userList=await userCollectionsObj.findOne({username:myusername})   
     res.send({message:userList.cart})
@@ -41,7 +42,7 @@ itemsApi.get('/addtocart/:username',expressErrorHandler(async(req,res,next)=>{
 itemsApi.post("/addToCartFromComponent/:username",expressErrorHandler(async(req,res,next)=>{
     let myusername=req.params.username;
     let itemToAdd=req.body;
- 
+    console.log("attendence from post")
 await userCollectionsObj.findOneAndUpdate(
     {
       username: myusername,
@@ -58,6 +59,7 @@ await userCollectionsObj.findOneAndUpdate(
 itemsApi.post("/removeFromCartFromComponent/:username",expressErrorHandler(async(req,res,next)=>{
     let myusername=req.params.username;
     let itemToAdd=req.body;
+    console.log("attendence from remove ")
 await userCollectionsObj.findOneAndUpdate(
     {
       username: myusername,

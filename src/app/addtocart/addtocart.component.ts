@@ -30,27 +30,45 @@ export class AddtocartComponent implements OnInit {
     }
   
     ngOnInit(): void {
-      console.log("besast");
-      this.us.getAllUser().subscribe(
-        res=>
-        {
-        console.log(res)
-        },
-        err=>
-        {
-          console.log("yeah error in refresh",err)
-        }
-      )
-  
-      
-  this.localUserObject = this.us.sharedUser.username
-  this.getlist();
+
+      console.log("yeah")
+    this.localUserObject = this.us.sharedUser.username
+    this.getlist();
       
     }
   
   
-    delete(id)
+//remove from Cart using id
+  delete(id,ind)
+{ 
+  
+    this.obj.deleteDataUsingId(id).subscribe
+    (
+    data=>{
+        console.log("deleted")
+        
+    },
+    err=>
+    {
+      console.log("error in reading",err)
+    }
+    ) 
+    this.getlist();
+    if(this.users.length==0)
+        {
+          console.log("yeah im loaded")
+        window.location.reload()
+      }
+   
+}
+
+
+
+
+
+    remove(obj,id)
     {  
+      console.log("deleet",obj,id)
       this.obj.deleteDataUsingId(id).subscribe(
       data=>{
         console.log(data)

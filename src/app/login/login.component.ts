@@ -12,25 +12,12 @@ export class LoginComponent implements OnInit {
   constructor(private us:UserService,private router:Router) { }
 
   ngOnInit(): void {
-  /*  this.us.getAllUser().subscribe(
-      res=>
-      {
-        console.log(res)
-       
-      },
-      err=>
-      {
-        console.log("yeah error in refresh",err)
-      }
-    )
-    */
+  
   }
 
   onLogin(userCredentials){
-    console.log("yeah bro from login",userCredentials)
     this.us.loginUser(userCredentials).subscribe(
       res=>{
-        console.log("yeah bro from login after calling",userCredentials)
         if(res.message==="Login successful"){
           //save token to localstorage
           
@@ -59,3 +46,17 @@ go(){
 }
 
 }
+
+
+/*  this.us.getAllUser().subscribe(
+      res=>
+      {
+        console.log(res)
+       
+      },
+      err=>
+      {
+        console.log("yeah error in refresh",err)
+      }
+    )
+    */

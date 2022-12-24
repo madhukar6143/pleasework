@@ -6,11 +6,8 @@ const expressErrorHandler=require("express-async-handler")
 const bcryptjs=require("bcryptjs")
 //connect angular app with express server
 
-
 const checkToken=require("./middlewares/verifyToken")
-
 userApi.use(exp.json())
-
 const databaseUrl="mongodb+srv://madhu:madhu@clusterbackend.szevd.mongodb.net/myfirstdb?retryWrites=true&w=majority"
 
 let databaseObj;
@@ -26,7 +23,6 @@ mc.connect(databaseUrl,{useNewUrlParser:true,useUnifiedTopology:true},(err,clien
         console.log("Database connection is success")
     }
 })
-
 
 //get http://localhost:3000/user/getusers
 userApi.get('/getusers',expressErrorHandler(async(req,res,next)=>{
@@ -49,7 +45,6 @@ userApi.get('/getusers/:username',expressErrorHandler(async(req,res,next)=>{
     else{
         res.send({message: userObj})
     }
-
 }))
 
 //create user
@@ -69,42 +64,14 @@ userApi.post("/createuser",expressErrorHandler(async(req,res,next)=>{
     }
 }))
 
-
-
-userApi.post("/createuser",expressErrorHandler(async(req,res,next)=>{
-    let newUser=req.body;
-    //search for existing users
-    let user=await userCollectionsObj.findOne({username:newUser.username})
-    if(user!=null){
-        res.send({message:"User already existed"})
-    }
-    else{
-        //hashing
-        let hashed=await bcryptjs.hash(newUser.password,7)
-        newUser.password = hashed;
-        await userCollectionsObj.insertOne(newUser)
-        res.send({message:"User created"})
-    }
-}))
-
-
-
- 
-    
-
 //user Login
 userApi.post('/login',expressErrorHandler(async(req,res)=>{
     let credentials=req.body;
-   let user=await userCollectionsObj.findOne({username:credentials.username})
-    
-    
+    let user=await userCollectionsObj.findOne({username:credentials.username})
     if(user==null){
         res.send({message:"Invalid username"})
-
     }
     else{
-        
-
         let result= await bcryptjs.compare(credentials.password,user.password)
         if(result===false){
             res.send({message:"Invalid pass"})

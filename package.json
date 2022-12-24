@@ -2,9 +2,9 @@
   "name": "delish",
   "version": "0.0.0",
   "scripts": {
-    "ng": "node server.js",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "ng": "ng",
+    "start": "node server.js",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

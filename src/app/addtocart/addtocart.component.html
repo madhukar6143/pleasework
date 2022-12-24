@@ -10,7 +10,7 @@
                      <h4>{{p.name}}</h4>
                      <h5 class="p-1 fw-bold">₹{{p.price}}</h5>
                      <div>
-                     <button class="btn x" (click)="delete(p.id)">Delete</button>
+                     <button class="btn x" (click)="delete(p,p.id)">Delete</button>
                      <button class="float-end btn-group btn">
                      <button class="btn btn-outline-light" (click)="callcounterminus(ind)">-</button>
                      <button class="btn btn-outline-light btn-success text-white">{{this.counter[ind]}}</button>

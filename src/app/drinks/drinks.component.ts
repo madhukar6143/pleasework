@@ -60,12 +60,12 @@ export class DrinksComponent implements OnInit {
   
    ngOnInit() 
    {
-     //this.getlist();  
+     this.getlist();  
    }
  
      getlist()
    {
-   this.Obj.getDrinksData().subscribe(
+    this.Obj.getFromAddToCart().subscribe(
      data=>
      {
        this.list=data.message;
